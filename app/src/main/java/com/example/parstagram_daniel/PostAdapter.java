@@ -12,14 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.parse.ParseFile;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
-    Context context;
-    List<Post> posts;
+    private Context context;
+    private List<Post> posts;
 
     public PostAdapter(Context context, List<Post> posts){
         this.context = context;
@@ -42,7 +43,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-        return 0;
+        return posts.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -51,6 +52,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         ImageButton ibComment;
         ImageButton ibDirectMessage;
         TextView tvUser;
+        TextView tvUserBottom;
         ImageView ivPost;
         TextView tvDescription;
 
@@ -61,15 +63,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             ibComment = itemView.findViewById(R.id.ibComment);
             ibDirectMessage = itemView.findViewById(R.id.ibDirectMessage);
             tvUser = itemView.findViewById(R.id.tvUser);
+            tvUserBottom = itemView.findViewById(R.id.tvUserBottom);
             ivPost = itemView.findViewById(R.id.ivPost);
             tvDescription = itemView.findViewById(R.id.tvDescription);
         }
 
         public void bind(Post post) {
-            tvUser.setText(post.getUser().toString());
+            tvUser.setText(post.getUser().getUsername());
+            tvUserBottom.setText(post.getUser().getUsername());
             tvDescription.setText(post.getDescription());
 
-            Glide.with(context).load(post.getImage()).into(ivPost);
+            ibLike.setImageResource(R.drawable.ufi_heart);
+            ibComment.setImageResource(R.drawable.ufi_comment);
+            ibDirectMessage.setImageResource(R.drawable.direct);
+
+            ParseFile image = post.getImage();
+            if(image != null) {
+                Glide.with(context).load(post.getImage().getUrl()).into(ivPost);
+            }
 
         }
     }
