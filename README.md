@@ -42,7 +42,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-![]https://github.com/raiden8210/ParstaGram-Daniel/blob/02b1eb2d1675fcc9e830ff68201637bed0925795/Pasted%20Graphic%201.png 
+![]![](https://github.com/raiden8210/Parstagram-Daniel/raw/master/Pasted%20Graphic%201.png) 
 
 GIF created with [Kap](https://getkap.co/).
 
