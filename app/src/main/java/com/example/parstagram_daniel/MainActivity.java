@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (item.getItemId()) {
                     case R.id.action_home:
-                        Toast.makeText(getBaseContext(), "Home button pressed", Toast.LENGTH_SHORT).show();
                         fragment = new postsFragment();
                         break;
                     case R.id.action_compose:

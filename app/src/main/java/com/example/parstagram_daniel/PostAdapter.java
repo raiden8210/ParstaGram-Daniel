@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.parse.ParseFile;
+import com.parse.ParseUser;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -21,10 +23,12 @@ import java.util.List;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     private Context context;
     private List<Post> posts;
+    private List<User> users;
 
     public PostAdapter(Context context, List<Post> posts){
         this.context = context;
         this.posts = posts;
+
     }
 
     @NonNull
@@ -46,11 +50,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         return posts.size();
     }
 
+    public void clear() {
+        posts.clear();
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView ivProfileImage;
-        ImageButton ibLike;
-        ImageButton ibComment;
-        ImageButton ibDirectMessage;
+        ImageView ibLike;
+        ImageView ibComment;
+        ImageView ibDirectMessage;
         TextView tvUser;
         TextView tvUserBottom;
         ImageView ivPost;
@@ -73,15 +82,34 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             tvUserBottom.setText(post.getUser().getUsername());
             tvDescription.setText(post.getDescription());
 
+            ibLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
+            ibComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
             ibLike.setImageResource(R.drawable.ufi_heart);
             ibComment.setImageResource(R.drawable.ufi_comment);
             ibDirectMessage.setImageResource(R.drawable.direct);
 
             ParseFile image = post.getImage();
-            if(image != null) {
+            if (image != null) {
                 Glide.with(context).load(post.getImage().getUrl()).into(ivPost);
             }
 
+            ParseFile profileImage = post.getUser().getParseFile("profilePic");
+            if (profileImage != null) {
+                Glide.with(context).load( post.getUser().getParseFile("profilePic").getUrl()).circleCrop().into(ivProfileImage);
+
+            }
         }
     }
 

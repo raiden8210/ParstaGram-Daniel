@@ -3,7 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ibComment"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/ivPost"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/ibLike"
+        app:srcCompat="@drawable/ufi_comment" />
+
+    <ImageView
+        android:id="@+id/ibDirectMessage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/ivPost"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/ibComment"
+        app:srcCompat="@drawable/direct" />
 
     <TextView
         android:id="@+id/tvUser"
@@ -14,6 +34,16 @@
         android:layout_marginTop="19dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:text="Daniel" />
+
+    <ImageView
+        android:id="@+id/ibLike"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/ivPost"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/ufi_heart" />
 
     <ImageView
         android:id="@+id/ivPost"
@@ -27,6 +57,16 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/ivPost"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        app:srcCompat="@drawable/ufi_save" />
+
+    <ImageView
         android:id="@+id/ivProfileImage"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -35,36 +75,6 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         tools:srcCompat="@tools:sample/avatars" />
-
-    <ImageButton
-        android:id="@+id/ibLike"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/ivPost"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:scaleType="centerInside" />
-
-    <ImageButton
-        android:id="@+id/ibComment"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/ivPost"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/ibLike"
-        android:scaleType="fitXY" />
-
-    <ImageButton
-        android:id="@+id/ibDirectMessage"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/ivPost"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/ibComment"
-        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/tvDescription"

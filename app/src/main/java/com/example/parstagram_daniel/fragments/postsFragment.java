@@ -7,15 +7,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.example.parstagram_daniel.EndlessRecyclerViewScrollListener;
 import com.example.parstagram_daniel.Post;
 import com.example.parstagram_daniel.PostAdapter;
 import com.example.parstagram_daniel.R;
+import com.example.parstagram_daniel.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -30,6 +34,9 @@ public class postsFragment extends Fragment {
     private RecyclerView rvPosts;
     protected PostAdapter adapter;
     protected List<Post> allPosts;
+    protected List<User> allUsers;
+    EndlessRecyclerViewScrollListener scrollListener;
+    SwipeRefreshLayout swipeContainer;
 
     public postsFragment() {
         // Required empty public constructor
@@ -42,23 +49,53 @@ public class postsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_posts, container, false);
     }
 
+
+
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvPosts = view.findViewById(R.id.rvPosts);
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+
         allPosts = new ArrayList<>();
+        //allUsers = new ArrayList<>();
         adapter = new PostAdapter(getContext(), allPosts);
 
         rvPosts.setAdapter(adapter);
-        rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        rvPosts.setLayoutManager(manager);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchTimeLineAsync(0);
+            }
+        });
+
+//        scrollListener = new EndlessRecyclerViewScrollListener(manager) {
+//            @Override
+//            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+//                loadNextSet();
+//            }
+//        };
 
         queryPosts();
+    }
+
+//    private void loadNextSet() {
+//
+//    }
+
+    private void fetchTimeLineAsync(int i) {
+        adapter.clear();
+        queryPosts();
+        swipeContainer.setRefreshing(false);
     }
 
     public void queryPosts() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
-        query.setLimit(20);
+        query.setLimit(adapter.getItemCount()-1);
         query.addDescendingOrder("createdAt");
         query.findInBackground(new FindCallback<Post>() {
             @Override

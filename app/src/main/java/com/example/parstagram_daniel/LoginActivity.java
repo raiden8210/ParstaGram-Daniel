@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.parstagram_daniel.databinding.ActivityLoginBinding;
 import com.parse.LogInCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         EditText usernameEditText = binding.etUsername;
         EditText passwordEditText = binding.etPassword;
         Button loginButton = binding.btnLogin;
+        Button signupButton = binding.btnSignup;
         ProgressBar loadingProgressBar = binding.loading;
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +55,34 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Buttonclicked", Toast.LENGTH_LONG).show();
             }
         });
+
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadingProgressBar.setVisibility((View.VISIBLE));
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                createUser(username, password);
+            }
+        });
+
+
+    }
+
+    private void createUser(String username, String password) {
+        ParseUser user = new ParseUser();
+        user.setUsername(username);
+        user.setPassword(password);
+
+        user.signUpInBackground(e ->  {
+            if(e == null) {
+                goMainActivity();
+                Toast.makeText(this, "User created!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 
