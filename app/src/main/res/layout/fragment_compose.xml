@@ -18,6 +18,7 @@
         android:id="@+id/btnCaptureImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
         android:text="TAKE PICTURE" />
 
     <ImageView
@@ -30,6 +31,7 @@
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
         android:text="SUBMIT" />
 
 </LinearLayout>

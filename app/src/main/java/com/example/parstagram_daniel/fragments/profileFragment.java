@@ -2,6 +2,7 @@ package com.example.parstagram_daniel.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.parstagram_daniel.LoginActivity;
-import com.example.parstagram_daniel.MainActivity;
-import com.example.parstagram_daniel.Post;
+import com.example.parstagram_daniel.Activities.LoginActivity;
+import com.example.parstagram_daniel.adapter.ProfileAdapter;
+import com.example.parstagram_daniel.models.Post;
 import com.example.parstagram_daniel.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -24,12 +25,19 @@ import com.parse.ParseUser;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class profileFragment extends postsFragment {
 
-    RecyclerView rvPosts;
+    RecyclerView rvProfile;
     Button btnLogout;
+    ProfileAdapter adapter;
+    List<Post> allPosts;
+
+    public profileFragment() {
+        // Required empty public constructor
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,9 +48,17 @@ public class profileFragment extends postsFragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvPosts = view.findViewById(R.id.rvPosts);
+        rvProfile = view.findViewById(R.id.rvProfile);
+
+        allPosts = new ArrayList<>();
+
+        adapter = new ProfileAdapter(getContext(), allPosts);
+
         btnLogout = view.findViewById(R.id.btnLogout);
-        rvPosts.setLayoutManager(new GridLayoutManager(getContext(), 3));
+
+        final GridLayoutManager layout = new GridLayoutManager(getContext(), 3);
+        rvProfile.setAdapter(adapter);
+        rvProfile.setLayoutManager(layout);
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +68,7 @@ public class profileFragment extends postsFragment {
             }
         });
 
+    queryPosts();
     }
 
     private void goLoginActivity() {
@@ -77,6 +94,9 @@ public class profileFragment extends postsFragment {
                 for(Post post: posts){
                     Log.i("MainActivity", "Post: " + post.getDescription() + ", username " + post.getUser().getUsername());
                 }
+                adapter.clear();
+                allPosts.clear();
+
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
             }

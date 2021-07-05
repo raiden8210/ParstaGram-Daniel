@@ -1,4 +1,4 @@
-package com.example.parstagram_daniel;
+package com.example.parstagram_daniel.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.parstagram_daniel.databinding.ActivityLoginBinding;
 import com.parse.LogInCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 

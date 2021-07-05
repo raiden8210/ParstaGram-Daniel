@@ -1,11 +1,9 @@
-package com.example.parstagram_daniel;
+package com.example.parstagram_daniel.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,8 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.parstagram_daniel.R;
+import com.example.parstagram_daniel.models.Post;
+import com.example.parstagram_daniel.models.User;
 import com.parse.ParseFile;
-import com.parse.ParseUser;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -85,7 +85,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             ibLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    ibLike.setImageResource(R.drawable.ufi_heart_active);
                 }
             });
 

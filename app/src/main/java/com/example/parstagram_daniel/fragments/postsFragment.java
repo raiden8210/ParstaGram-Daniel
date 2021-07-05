@@ -13,13 +13,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.example.parstagram_daniel.EndlessRecyclerViewScrollListener;
-import com.example.parstagram_daniel.Post;
-import com.example.parstagram_daniel.PostAdapter;
+import com.example.parstagram_daniel.models.Post;
+import com.example.parstagram_daniel.adapter.PostAdapter;
 import com.example.parstagram_daniel.R;
-import com.example.parstagram_daniel.User;
+import com.example.parstagram_daniel.models.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -54,7 +53,7 @@ public class postsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvPosts = view.findViewById(R.id.rvPosts);
+        rvPosts = view.findViewById(R.id.rvProfile);
         swipeContainer = view.findViewById(R.id.swipeContainer);
 
         allPosts = new ArrayList<>();
