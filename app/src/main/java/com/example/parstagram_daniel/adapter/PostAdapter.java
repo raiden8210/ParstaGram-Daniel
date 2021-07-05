@@ -3,6 +3,7 @@ package com.example.parstagram_daniel.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -72,6 +74,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView tvUserBottom;
         ImageView ivPost;
         TextView tvDescription;
+        TextView tvRelativeTimeAgo;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -83,12 +86,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             tvUserBottom = itemView.findViewById(R.id.tvUserBottom);
             ivPost = itemView.findViewById(R.id.ivPost);
             tvDescription = itemView.findViewById(R.id.tvDescription);
+            tvRelativeTimeAgo = itemView.findViewById(R.id.tvRelativeTime);
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.N)
         public void bind(Post post) {
             tvUser.setText(post.getUser().getUsername());
             tvUserBottom.setText(post.getUser().getUsername());
             tvDescription.setText(post.getDescription());
+            tvRelativeTimeAgo.setText(post.getRelativeTimeAgo(post.getCreatedAt()));
 
             ibLike.setOnClickListener(new View.OnClickListener() {
                 @Override

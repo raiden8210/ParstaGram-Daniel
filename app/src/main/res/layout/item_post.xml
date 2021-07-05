@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:text="Daniel" />
 
@@ -98,5 +98,15 @@
         android:layout_marginTop="10dp"
         android:text="TextView"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvRelativeTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
+        android:text="TextView" />
 
 </RelativeLayout>
