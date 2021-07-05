@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText usernameEditText;
     EditText passwordEditText;
     Button loginButton;
+    Button signupButton;
     ProgressBar loadingProgressBar;
 
 
@@ -36,11 +37,11 @@ public class LoginActivity extends AppCompatActivity {
             goMainActivity();
         }
 
-        EditText usernameEditText = binding.etUsername;
-        EditText passwordEditText = binding.etPassword;
-        Button loginButton = binding.btnLogin;
-        Button signupButton = binding.btnSignup;
-        ProgressBar loadingProgressBar = binding.loading;
+        usernameEditText = binding.etUsername;
+        passwordEditText = binding.etPassword;
+        loginButton = binding.btnLogin;
+        signupButton = binding.btnSignup;
+        loadingProgressBar = binding.loading;
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

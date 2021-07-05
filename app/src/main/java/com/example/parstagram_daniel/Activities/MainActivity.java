@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +19,7 @@ import com.example.parstagram_daniel.fragments.composeFragment;
 import com.example.parstagram_daniel.fragments.postsFragment;
 import com.example.parstagram_daniel.fragments.profileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.parse.ParseUser;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView rvPosts;
     List<Post> posts;
     PostAdapter adapter;
+    Context context;
 
     final FragmentManager fragmentManager = getSupportFragmentManager();
     private BottomNavigationView bottomNavigationView;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = this;
 
         //binding = ActivityMainBinding.inflate(getLayoutInflater());
         //setContentView(binding.getRoot());
@@ -56,13 +60,14 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (item.getItemId()) {
                     case R.id.action_home:
-                        fragment = new postsFragment();
+                        fragment = new postsFragment(context);
                         break;
                     case R.id.action_compose:
                         fragment = new composeFragment();
                         break;
                     case R.id.action_profile:
-                        fragment = new profileFragment();
+                        ParseUser user = ParseUser.getCurrentUser();
+                        fragment = new profileFragment(context, user);
                         break;
                     default:
                         break;

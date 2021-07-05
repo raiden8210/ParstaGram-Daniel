@@ -57,7 +57,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/ivSavePost"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_below="@+id/ivPost"

@@ -1,5 +1,6 @@
 package com.example.parstagram_daniel.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -36,9 +37,11 @@ public class postsFragment extends Fragment {
     protected List<User> allUsers;
     EndlessRecyclerViewScrollListener scrollListener;
     SwipeRefreshLayout swipeContainer;
+    Context context;
 
-    public postsFragment() {
+    public postsFragment(Context context) {
         // Required empty public constructor
+        this.context = context;
     }
 
     @Override

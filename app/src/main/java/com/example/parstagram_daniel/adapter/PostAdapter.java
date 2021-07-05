@@ -1,6 +1,8 @@
 package com.example.parstagram_daniel.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.parstagram_daniel.R;
+import com.example.parstagram_daniel.fragments.profileFragment;
 import com.example.parstagram_daniel.models.Post;
 import com.example.parstagram_daniel.models.User;
 import com.parse.ParseFile;
@@ -20,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private Context context;
     private List<Post> posts;
     private List<User> users;
@@ -93,6 +101,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 @Override
                 public void onClick(View v) {
 
+                }
+            });
+
+            ivProfileImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AppCompatActivity activity = (AppCompatActivity) context;
+                    Fragment fragment = new profileFragment(context, post.getUser());
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.flContainer, fragment).addToBackStack(null).commit();
                 }
             });
 

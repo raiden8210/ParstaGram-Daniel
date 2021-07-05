@@ -1,5 +1,6 @@
 package com.example.parstagram_daniel.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -19,6 +20,7 @@ import com.example.parstagram_daniel.adapter.ProfileAdapter;
 import com.example.parstagram_daniel.models.Post;
 import com.example.parstagram_daniel.R;
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -34,9 +36,12 @@ public class profileFragment extends postsFragment {
     Button btnLogout;
     ProfileAdapter adapter;
     List<Post> allPosts;
+    ParseUser user;
 
-    public profileFragment() {
+    public profileFragment(Context context, ParseUser user) {
         // Required empty public constructor
+        super(context);
+        this.user = user;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,7 +85,7 @@ public class profileFragment extends postsFragment {
     public void queryPosts() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
-        query.whereEqualTo(Post.KEY_USER, ParseUser.getCurrentUser());
+        query.whereEqualTo(Post.KEY_USER, user);
         query.setLimit(20);
         query.addDescendingOrder("createdAt");
         query.findInBackground(new FindCallback<Post>() {
