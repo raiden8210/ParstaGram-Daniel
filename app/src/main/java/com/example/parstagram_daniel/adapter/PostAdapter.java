@@ -124,8 +124,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             ParseFile profileImage = post.getUser().getParseFile("profilePic");
             if (profileImage != null) {
-                Glide.with(context).load( post.getUser().getParseFile("profilePic").getUrl()).circleCrop().into(ivProfileImage);
-
+                Glide.with(context).load(post.getUser().getParseFile("profilePic").getUrl()).circleCrop().into(ivProfileImage);
+            } else{
+                Glide.with(context).load(R.drawable.placeholderprofilepic).circleCrop().into(ivProfileImage);
             }
         }
     }
