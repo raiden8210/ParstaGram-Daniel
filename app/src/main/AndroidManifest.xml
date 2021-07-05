@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.parstagram_daniel">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <queries>
+
         <!-- Camera -->
         <intent>
             <action android:name="android.media.action.IMAGE_CAPTURE" />
@@ -19,8 +19,9 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.ParstaGramDaniel">
+        android:theme="@style/Theme.ParstaGramDaniel"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activities.PostDetailActivity"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -35,11 +36,11 @@
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.MainActivity">
-        </activity>
+        <activity android:name=".Activities.MainActivity"></activity>
     </application>
 
 </manifest>
