@@ -27,8 +27,8 @@
         android:layout_toStartOf="@+id/sendComment"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="Add a comment here!"
+        android:inputType="textPersonName" />
 
     <ImageView
         android:id="@+id/ivProfileImage"
