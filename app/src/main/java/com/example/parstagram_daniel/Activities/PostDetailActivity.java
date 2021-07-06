@@ -43,6 +43,7 @@ public class PostDetailActivity extends AppCompatActivity {
     ImageView ivPost;
     TextView tvDescription;
     TextView tvRelativeTime;
+    List<Post> allPosts;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -50,7 +51,7 @@ public class PostDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
 
-
+        allPosts = new ArrayList<>();
         ivProfileImage = findViewById(R.id.ivProfileImage);
         ibLike = findViewById(R.id.ibLike);
         ibComment = findViewById(R.id.ibComment);
@@ -64,27 +65,39 @@ public class PostDetailActivity extends AppCompatActivity {
         post = Parcels.unwrap(getIntent().getParcelableExtra(Post.class.getSimpleName()));
 
         tvUser.setText(post.getUser().getUsername());
-        tvUserBottom.setText(post.getUser().getUsername());
+        //tvUserBottom.setText(post.getUser().getUsername());
         tvDescription.setText(post.getDescription());
         tvRelativeTime.setText(post.getRelativeTimeAgo(post.getCreatedAt()));
 
-        ibLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ibLike.setImageResource(R.drawable.ufi_heart_active);
-            }
-        });
+//        ibLike.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ibLike.setImageResource(R.drawable.ufi_heart_active);
+//            }
+//        });
 
-        ibComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        ibComment.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                PostAdapter.OnClickListener onClickListener = new PostAdapter.OnClickListener() {
+//                    @Override
+//                    public void onItemClicked(int position) {
+//                        if(position != RecyclerView.NO_POSITION){
+//                            Intent i = new Intent(PostDetailActivity.this, CommentsActivity.class);
+//                            Post post = allPosts.get(position);
+//                            i.putExtra(Post.class.getSimpleName(), Parcels.wrap(post));
+//                            //Toast.makeText(context, position, Toast.LENGTH_SHORT).show();
+//                            //Log.i("DetailActivity", "rkrk");
+//                            PostDetailActivity.this.startActivity(i);
+//                        }
+//                    }
+//                };
+//            }
+//        });
 
-            }
-        });
-
-        ibLike.setImageResource(R.drawable.ufi_heart);
-        ibComment.setImageResource(R.drawable.ufi_comment);
-        ibDirectMessage.setImageResource(R.drawable.direct);
+//        ibLike.setImageResource(R.drawable.ufi_heart);
+//        ibComment.setImageResource(R.drawable.ufi_comment);
+//        ibDirectMessage.setImageResource(R.drawable.direct);
 
         ParseFile image = post.getImage();
         if (image != null) {

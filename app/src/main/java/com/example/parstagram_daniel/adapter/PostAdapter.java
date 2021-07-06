@@ -39,6 +39,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private List<Post> posts;
     private List<User> users;
 
+    public interface OnClickListener{
+        void onItemClicked(int position);
+    }
+
     public PostAdapter(Context context, List<Post> posts){
         this.context = context;
         this.posts = posts;
