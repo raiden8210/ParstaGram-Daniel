@@ -22,7 +22,7 @@
         android:theme="@style/Theme.ParstaGramDaniel"
         android:usesCleartextTraffic="true">
         <activity android:name=".Activities.PostDetailActivity"></activity>
-
+        <activity android:name=".Activities.CommentsActivity"></activity>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.codepath.fileprovider"

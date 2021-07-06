@@ -2,43 +2,36 @@ package com.example.parstagram_daniel.models;
 
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
 import com.parse.ParseClassName;
-import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-import org.parceler.Parcel;
-
 import java.util.Date;
 import java.util.Locale;
 
-@Parcel(analyze = Post.class)
-@ParseClassName("Post")
-public class Post extends ParseObject {
+@ParseClassName("Comment")
+public class Comment extends ParseObject {
+
     private static final int SECOND_MILLIS = 1000;
     private static final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
     private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
     private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
 
-    public Post () {};
-
-    public static final String KEY_DESCRIPTION = "description";
-    public static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
-    public static final String CREATEDAT = "createdAt";
+    public static final String KEY_IMAGE = "image";
+    public static final String KEY_DESCRIPTION = "description";
 
-    public String getDescription(){
-        return getString(KEY_DESCRIPTION);
+
+    public ParseUser getUser(){
+        return getParseUser(KEY_USER);
     }
 
-    //Set, not returning anythign
-    public void setDescription(String description){
-        put(KEY_DESCRIPTION, description);
+    public void setUser(ParseUser user){
+        put(KEY_USER, user);
     }
 
     public ParseFile getImage(){
@@ -49,16 +42,16 @@ public class Post extends ParseObject {
         put(KEY_IMAGE, parseFile);
     }
 
-    public ParseUser getUser(){
-        return getParseUser(KEY_USER);
+    public String getDescription(){
+        return getString(KEY_DESCRIPTION);
     }
 
-    public void setUser(ParseUser user){
-        put(KEY_USER, user);
+    public void setDescription(String description){
+        put(KEY_DESCRIPTION, description);
     }
 
-    public boolean isLiked(){
-        return false;
+    public void setPostId(String objectId) {
+        put("postedId", objectId);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -88,6 +81,4 @@ public class Post extends ParseObject {
         }
 
     }
-
-
 }

@@ -1,10 +1,13 @@
 package com.example.parstagram_daniel.Activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,7 +42,9 @@ public class PostDetailActivity extends AppCompatActivity {
     TextView tvUserBottom;
     ImageView ivPost;
     TextView tvDescription;
+    TextView tvRelativeTime;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +59,14 @@ public class PostDetailActivity extends AppCompatActivity {
         tvUserBottom = findViewById(R.id.tvUserBottom);
         ivPost = findViewById(R.id.ivPost);
         tvDescription = findViewById(R.id.tvDescription);
+        tvRelativeTime = findViewById(R.id.tvRelativeTime);
 
         post = Parcels.unwrap(getIntent().getParcelableExtra(Post.class.getSimpleName()));
 
         tvUser.setText(post.getUser().getUsername());
         tvUserBottom.setText(post.getUser().getUsername());
         tvDescription.setText(post.getDescription());
+        tvRelativeTime.setText(post.getRelativeTimeAgo(post.getCreatedAt()));
 
         ibLike.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,31 +95,6 @@ public class PostDetailActivity extends AppCompatActivity {
         if (profileImage != null) {
             Glide.with(this).load(post.getUser().getParseFile("profilePic").getUrl()).circleCrop().into(ivProfileImage);
 
-
-            //queryPosts();
-
         }
-
-//    private void queryPosts() {
-//        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-//        query.include(Post.KEY_USER);
-//        query.setLimit(adapter.getItemCount()-1);
-//        query.addDescendingOrder("createdAt");
-//        query.findInBackground(new FindCallback<Post>() {
-//            @Override
-//            public void done(List<Post> posts, ParseException e) {
-//                if(e!= null){
-//                    Log.e("MainActivity", "Issue with getting posts", e);
-//                    return;
-//                }
-//
-//                for(Post post: posts){
-//                    Log.i("MainActivity", "Post: " + post.getDescription() + ", username " + post.getUser().getUsername());
-//                }
-//                post.addAll(posts);
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
-//    }
     }
 }
