@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 loginUser(username, password);
-                Toast.makeText(LoginActivity.this, "Buttonclicked", Toast.LENGTH_LONG).show();
+                //Toast.makeText(LoginActivity.this, "Buttonclicked", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -93,7 +93,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if(e != null){
-                    Log.e("LoginActivity", "Something went wrong");
+                    Log.e("LoginActivity", "Incorrect Login Info!");
+                    Toast.makeText(LoginActivity.this,"Incorrect Login Info", Toast.LENGTH_SHORT).show();
+                    loadingProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 goMainActivity();
